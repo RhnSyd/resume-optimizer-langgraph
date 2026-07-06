@@ -1,5 +1,6 @@
 from pypdf import PdfReader
 from docx import Document
+from src.graph.state import ResumeState
 
 
 def extract_pdf(path: str) -> str:
@@ -14,7 +15,7 @@ def extract_docx(path: str) -> str:
     return "\n".join(p.text for p in doc.paragraphs)
 
 
-def ingest_node(state: dict) -> dict:
+def ingest_node(state: ResumeState) -> dict:
     """
     LangGraph node: reads state['resume_path'], extracts text,
     returns partial state update.

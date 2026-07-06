@@ -2,9 +2,10 @@
 Stub nodes — pass-through logic so the graph shape can be tested
 before real LLM/LaTeX logic is written. Replace one at a time later.
 """
+from src.graph.state import ResumeState
 
 
-def ats_score_node(state: dict) -> dict:
+def ats_score_node(state: ResumeState) -> dict:
     print(f"[ats_score] iteration={state.get('iteration', 0)}")
     # Fake: score improves after first rewrite, to test the loop+exit both work
     iteration = state.get("iteration", 0)
@@ -14,7 +15,7 @@ def ats_score_node(state: dict) -> dict:
     return {"ats_score_new": score, "status": "verifying"}
 
 
-def gap_analysis_node(state: dict) -> dict:
+def gap_analysis_node(state: ResumeState) -> dict:
     print("[gap_analysis] running")
     return {
         "gap_report": ["missing quantified metrics", "no cloud keywords"],
@@ -22,7 +23,7 @@ def gap_analysis_node(state: dict) -> dict:
     }
 
 
-def rewrite_xyz_node(state: dict) -> dict:
+def rewrite_xyz_node(state: ResumeState) -> dict:
     iteration = state.get("iteration", 0)
     print(f"[rewrite_xyz] running, iteration={iteration}")
     return {
@@ -32,22 +33,22 @@ def rewrite_xyz_node(state: dict) -> dict:
     }
 
 
-def generate_latex_node(state: dict) -> dict:
+def generate_latex_node(state: ResumeState) -> dict:
     print("[generate_latex] running")
     return {"latex_source": "\\documentclass{article}...", "status": "generating_output"}
 
 
-def compile_outputs_node(state: dict) -> dict:
+def compile_outputs_node(state: ResumeState) -> dict:
     print("[compile_outputs] running")
     return {"pdf_path": "output/resume.pdf", "status": "awaiting_feedback"}
 
 
-def await_feedback_node(state: dict) -> dict:
+def await_feedback_node(state: ResumeState) -> dict:
     print("[await_feedback] running (interrupt will pause here in step 11)")
     return {"user_feedback": None, "status": "done"}
 
 
-def compare_gate(state: dict) -> str:
+def compare_gate(state: ResumeState) -> str:
     """Conditional edge after ats_recheck: loop back or proceed."""
     score_new = state.get("ats_score_new", 0)
     score_initial = state.get("ats_score_initial", 0)
@@ -63,7 +64,7 @@ def compare_gate(state: dict) -> str:
     return "rewrite_xyz"
 
 
-def route_feedback(state: dict) -> str:
+def route_feedback(state: ResumeState) -> str:
     """Conditional edge after await_feedback: redo or end."""
     feedback = state.get("user_feedback")
     if feedback:

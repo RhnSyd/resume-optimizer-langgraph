@@ -1,6 +1,7 @@
 langgraph
 langchain
 langchain-anthropic
+langchain-google-genai
 python-dotenv
 pypdf
 python-docx
