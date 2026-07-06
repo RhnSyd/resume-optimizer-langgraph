@@ -3,10 +3,10 @@ from langgraph.graph import StateGraph, END
 from src.graph.state import ResumeState
 from src.nodes.ingest import ingest_node
 from src.nodes.ats_score import ats_score_node
+from src.nodes.rewrite_xyz import rewrite_xyz_node
 from src.nodes.stub_nodes import (
     # ats_score_node,
-    gap_analysis_node,
-    rewrite_xyz_node,
+    # rewrite_xyz_node,
     generate_latex_node,
     compile_outputs_node,
     await_feedback_node,
