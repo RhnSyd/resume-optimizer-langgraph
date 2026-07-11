@@ -3,11 +3,17 @@ __pycache__/
 .env
 .venv/
 venv/
-*.pdf
-!templates/*.pdf
+
+# Generated resume outputs (PDFs, .tex, and LaTeX build artifacts) — these are
+# runtime output, not source. resume.cls in src/templates/ is NOT covered by
+# this since it lives outside the output/ folder.
+output/
 *.aux
 *.log
 *.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
 checkpoints/
 .DS_Store
-outputs/
