@@ -1,6 +1,6 @@
 from typing import TypedDict, Literal, Optional
 
-# TypedDict stores a dictionary that has a preset keys and the data types for the values. Works like a regular Dict but good to know the exact key and data type for it
+
 class ResumeState(TypedDict):
     # Inputs
     resume_path: str
@@ -23,12 +23,15 @@ class ResumeState(TypedDict):
     # Output artifacts
     latex_source: str
     pdf_path: str
+    page_count: int
+    latex_iteration: int
+    length_feedback: Optional[str]
 
-    # Feedback loop -- Optional because user_feedback may also be Null and Optional sets it to either Null or a str
+    # Feedback loop
     user_feedback: Optional[str]
     feedback_history: list[str]
 
-    # Control -- Literal sets the status to any 1 of the calues in that list. Meaning the status can only be either verifying or rewriting at a time, etc.
+    # Control
     status: Literal[
         "ingesting",
         "scoring",

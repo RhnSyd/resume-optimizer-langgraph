@@ -1,0 +1,109 @@
+\documentclass[25pt]{resume}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lipsum}
+\usepackage{fontawesome}
+\usepackage{mathptmx}
+\pagestyle{empty}
+\usepackage[15pt]{moresize}
+\usepackage{graphicx}
+\newgeometry{left=0.4in, top=0.4in, right=0.4in, bottom=0.5in}
+
+\begin{document}
+\fontsize{11.5pt}{15.5pt}\selectfont
+
+\begin{center}
+    {\Huge \textbf{Rehan Ashfaq Syed}}\\[4pt]
+    \scalebox{0.95}{
+        \faPhone\ 4156855073 \;\textbar\; \faEnvelope\ \href{mailto:rhnsyd98@gmail.com}{rhnsyd98@gmail.com} \;\textbar\; \faGithub\ \href{https://github.com/RhnSyd}{github.com/RhnSyd} \;\textbar\; \faLinkedin\ \href{https://linkedin.com/in/rhnsyd}{linkedin.com/in/rhnsyd}
+    }
+\end{center}
+
+\begin{center}
+Data engineer with ML exposure building production-grade pipelines, feature stores, and data platforms on dbt, Databricks, Spark, Airflow, and GCP/AWS. Five years shipping large-scale ETL/ELT systems, orchestration workflows, and ML infrastructure across Bell, Conservice, and Kingscote -- with hands-on experience supporting NLP and predictive modeling in production.
+\end{center}
+
+\begin{ResumeSection}{experience}
+    \textbf{\fontsize{13pt}{15pt}\selectfont Bell }
+
+    \textbf{Data Scientist} \hfill Aug 2022 -- Present
+    \begin{itemize}
+        \item Built Apache Flink + Redis live streaming pipelines processing high-throughput CSP network telemetry, detecting disconnected wires in real time and generating \textbf{\$750K annual savings}.
+        \item Engineered Hadoop-to-GCP data migration pipelines enriching ML training tables, improving downstream model precision \textbf{34\%}.
+        \item Built GCP geospatial ETL pipelines using Python and Google Maps APIs, lifting customer address coordinate accuracy from \textbf{60\% to 85\%}.
+        \item Applied time-series feature engineering on high-frequency network telemetry to surface failure lead-lag relationships, cutting MTTD \textbf{25\%}.
+        \item Built network disruption ML models: TensorFlow feedforward (\textbf{87\% accuracy}) and CNN-LSTM time-series, cutting unnecessary truck rolls by \textbf{17\%}.
+        \item Ran Hadoop network infrastructure analysis identifying CSP capacity gaps, securing \textbf{\$3.5M} for remediation.
+        \item Productionized Python/Java data-pull jobs with DevOps, co-authoring \textbf{GitLab CI/CD} pipelines and \textbf{Dockerfiles} and tuning \textbf{OpenShift} CPU/memory allocations.
+        \item Owned analytics for the Virtual Repair RL diagnostic system, building FMO vs CMO comparison frameworks quantifying model lift and regressions against current technician workflows.
+        \item Built an \textbf{LLM agent} querying internal APIs and SQL DBs for recurring Outage Notification Program ad-hoc requests, saving \textbf{4 analyst-hours weekly}.
+        \item Built live GCP Pub/Sub streaming ingestion joined to Oracle, loading into SQL Server triggers for at-risk B2B ticket monitoring, cutting SLA breach times \textbf{80\%}.
+
+        \vspace{0.3\baselineskip}
+        {\underline{\textbf{Tools \& Technologies:}} Python, SQL, Apache Flink, Redis, GCP Pub/Sub, Hadoop, TensorFlow, GitLab CI/CD, Docker, OpenShift, GCP, Oracle, SQL Server, LLM Agents}
+    \end{itemize}
+    \vspace{0.5\baselineskip}
+
+    \textbf{\fontsize{13pt}{15pt}\selectfont Conservice }
+
+    \textbf{Data Scientist} \hfill Jan 2022 -- Aug 2022
+    \begin{itemize}
+        \item Built production \textbf{Databricks} (\textbf{PySpark}) transformations on \textbf{Delta Lake} tables, unifying raw utility feeds into analytics-ready datasets for forecasting and anomaly models.
+        \item Developed modular \textbf{dbt} models over AWS Redshift and Databricks (staging / intermediate / mart layers), improving lineage transparency and cutting analyst onboarding \textbf{40\%}.
+        \item Implemented \textbf{dbt} tests and data quality monitoring (schema, uniqueness, not-null, freshness), catching upstream drift before downstream models broke.
+        \item Orchestrated ML data pipelines in \textbf{Airflow} and \textbf{Dagster}, scheduling feature engineering jobs and maintaining reusable feature-store style datasets.
+        \item Deployed ML pipelines with engineering using \textbf{Docker}, \textbf{Kubernetes}, and \textbf{CI/CD} for scalable model serving and reproducible releases.
+        \item Applied \textbf{K-Means clustering} on \textbf{50K+ Redshift residential properties} to segment by geography and consumption behavior, surfacing high-risk usage outliers.
+        \item Built \textbf{XGBoost} and \textbf{Linear Regression} models forecasting monthly utility expenses across residential portfolios, improving property-manager budgeting accuracy.
+        \item Ran time-series analysis on smart-meter data to detect seasonal and over-usage trends informing operational optimization.
+
+        \vspace{0.3\baselineskip}
+        {\underline{\textbf{Tools \& Technologies:}} Python, SQL, Databricks, PySpark, Delta Lake, dbt, AWS Redshift, Airflow, Dagster, Docker, Kubernetes, CI/CD, XGBoost, Scikit-learn}
+    \end{itemize}
+    \vspace{0.5\baselineskip}
+
+    \textbf{\fontsize{13pt}{15pt}\selectfont Kingscote Informatics }
+
+    \textbf{Data Analyst} \hfill Jan 2021 -- Oct 2021
+    \begin{itemize}
+        \item Built modular \textbf{dbt} + \textbf{Snowflake} pipelines standardizing raw IoT sensor data into analytics-ready datasets, cutting manual prep time \textbf{40\%}.
+        \item Authored reusable \textbf{dbt} macros and tests (uniqueness, not-null, accepted-value) across staging and mart models, hardening reporting reliability.
+        \item Documented \textbf{dbt} model contracts and lineage in \textbf{Git}, giving consumers a single source of truth for sensor data definitions.
+        \item Built \textbf{Airflow} orchestration workflows scheduling sensor telemetry and log ingestion ETL jobs, improving data availability for analytics teams.
+        \item Engineered reusable feature pipelines for predictive maintenance, building curated feature-store style tables that improved training efficiency and reproducibility.
+        \item Analyzed \textbf{86K+ IoT sensor logs} in SQL and R to identify noise and signal degradation, improving data quality for downstream analytics.
+        \item Built \textbf{Streamlit} prototypes exposing sensor health metrics to operations teams, accelerating triage on field-deployed hardware.
+
+        \vspace{0.3\baselineskip}
+        {\underline{\textbf{Tools \& Technologies:}} dbt, Snowflake, Airflow, SQL, R, Streamlit, Git, ETL Pipelines, Feature Engineering, Feature Store}
+    \end{itemize}
+    \vspace{0.5\baselineskip}
+\end{ResumeSection}
+
+\begin{ResumeSection}{Projects}
+    \begin{itemize}
+        \item \textbf{Open Intent Classifier} -- End-to-end NLP pipeline (BERT + RAG) with ingestion, embeddings, and retrieval, achieving \textbf{30\% higher accuracy} over a graph-based baseline.
+        \item \textbf{Sentiment Classification} -- LSTM + Self-Attention model on IMDb reviews achieving \textbf{97.4\% accuracy}, deployed via Streamlit.
+        \item \textbf{RFID Embedded Speech Synthesizer} -- Embedded system reading \textbf{RFID} tag IDs aloud via a speech-synthesis module, integrating microcontroller firmware with the RFID reader.
+    \end{itemize}
+\end{ResumeSection}
+
+\begin{ResumeSection}{Education}
+    \textbf{Master of Engineering} -- Electrical \& Computer Engineering \hfill \textit{Toronto Metropolitan University} \\
+    Dec 2025 \\
+    \textbf{Bachelor of Engineering} -- Electronics and Communication Engineering \hfill \textit{Osmania University} \\
+    Sep 2020
+\end{ResumeSection}
+
+\begin{ResumeSection}{Skills}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l p{0.75\textwidth}}
+\textbf{Data Engineering} & dbt, Databricks, PySpark, Delta Lake, Snowflake, Apache Flink, Airflow, Dagster, ETL/ELT Pipelines, Feature Store \\
+\textbf{Cloud \& Big Data} & GCP, AWS, BigQuery, Redshift, Spark, Hadoop, Kafka, GCP Pub/Sub \\
+\textbf{DevOps \& MLOps} & Docker, Kubernetes, OpenShift, GitLab CI/CD, Git, MLOps, ML Pipelines \\
+\textbf{Machine Learning \& NLP} & TensorFlow, PyTorch, Scikit-learn, XGBoost, LightGBM, BERT, NLP, LLM Agents, RAG \\
+\textbf{Databases} & SQL, NoSQL, MongoDB, Cassandra, Redis, Elasticsearch, Oracle, SQL Server \\
+\textbf{Analytics \& BI} & Looker (LookML), Power BI, Grafana, Plotly Dash, Streamlit \\
+\textbf{Core} & Python, SQL, R, Java, Machine Learning \\
+\end{tabular*}
+\end{ResumeSection}
+
+\end{document}

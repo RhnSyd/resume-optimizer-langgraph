@@ -1,5 +1,6 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from src.graph.state import ResumeState
+from src.utils.llm_helpers import normalize_content
 
 REWRITE_PROMPT = """You are a resume writer who has gotten candidates into FAANG-level Data Science and ML roles.
 Rewrite the resume below to fix the specific issues listed.
@@ -59,7 +60,7 @@ Job Description (for context on what to emphasize):
 
 
 def rewrite_resume(resume_text: str, gap_report: list[str], job_description: str, user_feedback: str | None = None) -> str:
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.3)
 
     issues = "\n".join(f"- {g}" for g in gap_report) if gap_report else "- General improvement pass, no specific issues flagged."
 
@@ -75,7 +76,7 @@ def rewrite_resume(resume_text: str, gap_report: list[str], job_description: str
     )
 
     response = llm.invoke(prompt)
-    return response.content.strip()
+    return normalize_content(response.content).strip()
 
 
 def rewrite_xyz_node(state: ResumeState) -> dict:
@@ -85,7 +86,10 @@ def rewrite_xyz_node(state: ResumeState) -> dict:
     resume_draft on subsequent passes (so each rewrite builds on the last).
     """
     iteration = state.get("iteration", 0)
-    source_text = state["resume_draft"] if iteration > 0 else state["resume_raw"]
+    # Use resume_draft if one already exists (from a prior rewrite pass or feedback redo),
+    # regardless of the iteration count — iteration is just the retry-budget counter,
+    # not an indicator of whether a draft exists yet.
+    source_text = state.get("resume_draft") or state["resume_raw"]
 
     print(f"[rewrite_xyz] rewriting, iteration={iteration}")
     new_draft = rewrite_resume(
