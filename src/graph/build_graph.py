@@ -1,4 +1,3 @@
-from typing import TypedDict, Literal, Optional
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from dotenv import load_dotenv
@@ -12,25 +11,7 @@ from src.nodes.rewrite_xyz import rewrite_xyz_node
 from src.nodes.generate_latex import generate_latex_node
 from src.nodes.compile_outputs import compile_outputs_node, page_length_gate, build_length_feedback
 from src.nodes.feedback_loop import await_feedback_node, route_feedback, reset_for_feedback_redo
-
-
-class ResumeState(TypedDict):
-    resume_path: str
-    job_description: str
-    resume_raw: str
-    ats_score_initial: float
-    ats_score_new: float
-    gap_report: list[str]
-    resume_draft: str
-    iteration: int
-    latex_source: str
-    pdf_path: str
-    page_count: int
-    latex_iteration: int
-    length_feedback: Optional[str]
-    user_feedback: Optional[str]
-    feedback_history: list[str]
-    status: str
+from src.graph.state import ResumeState
 
 
 builder = StateGraph(ResumeState)
@@ -94,36 +75,5 @@ graph = builder.compile(
     interrupt_before=["await_feedback"],
 )
 
-if __name__ == "__main__":
-    config = {"configurable": {"thread_id": "test-run-1"}}
-
-    print("=== FIRST INVOKE: runs until it pauses before await_feedback ===\n")
-    result = graph.invoke(
-        {
-            "resume_path": "data/samples/Rehan_DataEngineer.pdf",
-            "job_description": "Looking for a Senior Data Scientist with cloud + ML experience.",
-            "iteration": 0,
-            "latex_iteration": 0,
-            "feedback_history": [],
-        },
-        config=config,
-    )
-    print("\n--- PAUSED. Current state snapshot: ---")
-    print("page_count:", result.get("page_count"))
-    print("pdf_path:", result.get("pdf_path"))
-    print("status:", result.get("status"))
-
-    # Simulate the person reviewing the PDF and giving feedback.
-    # In a real interface, this input would come from the user, not be hardcoded.
-    feedback_text = "Please make the summary emphasize NLP and LLM work more, less data engineering."
-    print(f"\n=== SUPPLYING FEEDBACK: '{feedback_text}' ===\n")
-    graph.update_state(config, {"user_feedback": feedback_text})
-
-    print("=== SECOND INVOKE: resumes from the pause and continues ===\n")
-    result2 = graph.invoke(None, config=config)
-
-    print("\n=== FINAL STATE ===")
-    for k, v in result2.items():
-        if k in ("resume_raw", "latex_source"):
-            continue  # too long to print usefully here
-        print(f"{k}: {v}")
+# No hardcoded test harness here anymore — run the graph via main.py, which takes
+# real resume/JD input and prompts for actual feedback instead of simulating it.

@@ -1,0 +1,26 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# System dependencies: pdflatex + the specific LaTeX packages this resume
+# template needs (fontawesome icons, mathptmx font, moresize sizing commands).
+# Confirmed exact package names by testing directly — texlive-fonts-extra is
+# large (~630MB) since fontawesome lives in it, but there's no smaller package
+# that provides it.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    texlive-fonts-recommended \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV PYTHONUNBUFFERED=1
+
+# Render assigns $PORT dynamically — must bind to it, not a hardcoded port.
+# 0.0.0.0 is required so the container is reachable from outside itself.
+CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0

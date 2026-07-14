@@ -1,8 +1,8 @@
 langgraph
 langchain
-langchain-anthropic
 langchain-google-genai
+langchain-deepseek
 python-dotenv
 pypdf
 python-docx
-pydantic
+streamlit

@@ -1,7 +1,7 @@
 import os
 import shutil
 import subprocess
-import uuid
+import glob
 from pypdf import PdfReader
 from src.graph.state import ResumeState
 
@@ -20,6 +20,16 @@ def compile_latex(latex_source: str, output_dir: str = OUTPUT_DIR) -> tuple[str,
     """
     os.makedirs(output_dir, exist_ok=True)
 
+    # Clear any leftover artifacts from a previous run FIRST, regardless of what
+    # caused them (crash mid-compile, old uuid-named files, etc.) — guarantees a
+    # clean slate every time rather than assuming last run's cleanup succeeded.
+    for stray in glob.glob(os.path.join(output_dir, "resume*")):
+        if not stray.endswith((".tex", ".pdf")):
+            os.remove(stray)
+    # Also remove any old-style uuid-named resume files from before this fix
+    for stray in glob.glob(os.path.join(output_dir, "resume_*")):
+        os.remove(stray)
+
     if not os.path.exists(TEMPLATE_CLS_PATH):
         raise FileNotFoundError(
             f"resume.cls not found at {TEMPLATE_CLS_PATH} — copy it there from your template zip."
@@ -33,8 +43,7 @@ def compile_latex(latex_source: str, output_dir: str = OUTPUT_DIR) -> tuple[str,
             "(MiKTeX/TeX Live) is installed and pdflatex is accessible from a terminal."
         )
 
-    job_id = uuid.uuid4().hex[:8]
-    tex_filename = f"resume_{job_id}.tex"
+    tex_filename = "resume.tex"
     tex_path = os.path.join(output_dir, tex_filename)
 
     with open(tex_path, "w", encoding="utf-8") as f:
@@ -50,10 +59,10 @@ def compile_latex(latex_source: str, output_dir: str = OUTPUT_DIR) -> tuple[str,
             timeout=180,
         )
 
-    pdf_path = os.path.join(output_dir, f"resume_{job_id}.pdf")
+    pdf_path = os.path.join(output_dir, "resume.pdf")
 
     if not os.path.exists(pdf_path):
-        log_path = os.path.join(output_dir, f"resume_{job_id}.log")
+        log_path = os.path.join(output_dir, "resume.log")
         log_tail = ""
         if os.path.exists(log_path):
             with open(log_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -61,6 +70,14 @@ def compile_latex(latex_source: str, output_dir: str = OUTPUT_DIR) -> tuple[str,
         raise RuntimeError(f"pdflatex failed to produce a PDF. Log tail:\n{log_tail}")
 
     page_count = len(PdfReader(pdf_path).pages)
+
+    # Clean up every LaTeX build artifact except the .tex source and final .pdf.
+    # Glob catches whatever extension MiKTeX/TeX Live happens to produce (.aux,
+    # .log, .out, .fls, .fdb_latexmk, .synctex.gz, etc.) rather than a fixed list.
+    for stray in glob.glob(os.path.join(output_dir, "resume.*")):
+        if not stray.endswith((".tex", ".pdf")):
+            os.remove(stray)
+
     return pdf_path, page_count
 
 

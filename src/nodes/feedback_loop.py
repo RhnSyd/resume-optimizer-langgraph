@@ -11,9 +11,9 @@ def await_feedback_node(state: ResumeState) -> dict:
     feedback = state.get("user_feedback")
     if feedback:
         print(f"[await_feedback] received feedback: {feedback}")
-    else:
-        print("[await_feedback] no feedback provided — treating as approval")
-    return {"status": "awaiting_feedback"}
+        return {"status": "revising"}
+    print("[await_feedback] no feedback provided — approved")
+    return {"status": "done"}
 
 
 def route_feedback(state: ResumeState) -> str:

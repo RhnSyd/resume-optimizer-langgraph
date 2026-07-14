@@ -1,0 +1,42 @@
+About Sesame
+
+Sesame believes in a future where computers are lifelike - with the ability to see, hear, and collaborate with us in ways that feel natural and human. With this vision, we're designing a new kind of computer, focused on making voice agents part of our daily lives. Our team brings together founders from Oculus and Ubiquity6, alongside proven leaders from Meta, Google, and Apple, with deep expertise spanning hardware and software. Join us in shaping a future where computers truly come alive.
+
+About The Role
+
+We're looking for a Data Engineer to build and maintain the data pipelines that feed Sesame's AI models. You'll collaborate directly with machine learning engineers and researchers — your job is to make sure they have the right data, in the right shape, at the right time to train, evaluate, and ship models.
+
+Sesame's data is rich and complex: conversations, voice, sensor signals, and product telemetry. You'll design the systems that take raw, unstructured, multimodal data and turn it into clean, versioned, well-documented datasets that ML teams can trust and build on confidently.
+
+This is a deeply technical, infrastructure-focused role — closer to ML engineering than traditional data analytics. You'll be deeply embedded with ML teams, understanding their workflows and building infrastructure that accelerates the full model development lifecycle — from data collection and labeling through training and evaluation.
+
+Responsibilities
+
+Design and build production data pipelines that prepare conversational, voice, and multimodal data for model training and evaluation.
+Partner directly with ML engineers to understand data requirements for new models and experiments, and deliver datasets that meet those needs.
+Build and maintain infrastructure for dataset versioning, lineage tracking, and reproducibility — so any training run can be traced back to its exact data.
+Develop data quality frameworks that catch issues before they become model quality issues: schema validation, drift detection, and coverage monitoring.
+Optimise large-scale data processing for cost and performance across Sesame's cloud infrastructure.
+Build tooling that makes it easy for ML engineers and researchers to discover, explore, and request data independently.
+Define and enforce data governance and privacy standards, particularly around sensitive conversational and voice data.
+Contribute to architecture decisions around Sesame's broader data platform as the team and data volume grow.
+
+Required Qualifications
+
+5+ years in data engineering, with meaningful experience supporting ML or AI teams specifically.
+Strong SQL and Python skills — you'll use both daily.
+Experience building and operating ETL/ELT pipelines at scale using modern data platforms and tooling.
+Experience with workflow orchestration systems such as Airflow, Dagster, or Prefect.
+Hands-on experience with ML data workflows: training data pipelines, dataset versioning, data labeling pipelines, or model evaluation data.
+A solid understanding of how ML teams work — you don't need to train models; what matters is understanding what makes a good training dataset and why data quality directly affects model performance.
+Comfort working with unstructured and semi-structured data — audio, text, JSON logs — not just clean relational tables.
+Strong communication skills. You'll be embedded with ML engineers and need to bridge data systems and model requirements effectively.
+
+Preferred Qualifications
+
+Vector databases, embedding storage, or feature stores.
+Data from hardware or embedded systems: telemetry, sensors, real-time streams.
+Distributed compute frameworks for large-scale data processing such as Ray or Spark.
+Kubernetes and managed Kubernetes environments such as GKE or EKS.
+Data privacy frameworks, especially around voice or conversational data.
+Building internal tooling or self-serve data platforms.
